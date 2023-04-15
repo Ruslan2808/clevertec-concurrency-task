@@ -42,6 +42,7 @@ public class Client {
         int numberRequests = values.size();
 
         futureResponses = IntStream.range(0, numberRequests)
+                .parallel()
                 .mapToObj(numberRequest -> (Callable<Response>) () -> {
                     int removedValue = removeRandomValue();
                     return server.processRequest(new Request(removedValue));
